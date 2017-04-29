@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tinhhuynh.criminalintent.R;
 import com.example.tinhhuynh.criminalintent.model.Crime;
@@ -124,6 +123,7 @@ public class CrimeListFragment extends Fragment {
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
             mAdapter.notifyDataSetChanged();
+            mAdapter.setCrimes(crimes);
         }
 
         updateSubtitle();
@@ -173,7 +173,7 @@ public class CrimeListFragment extends Fragment {
 
         public void bindCrime(Crime crime) {
             mCrime = crime;
-            mTitleTextView.setText(mCrime.getTitle().toString());
+            mTitleTextView.setText(mCrime.getTitle());
             mDateTextView.setText(mCrime.getDate().toString());
             mSolvedCheckBox.setChecked(mCrime.isSolved());
         }
@@ -209,6 +209,10 @@ public class CrimeListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mCrimes.size();
+        }
+
+        public void setCrimes(List<Crime> crimes) {
+            mCrimes = crimes;
         }
     }
 
